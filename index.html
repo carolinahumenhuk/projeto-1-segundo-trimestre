@@ -1,76 +1,96 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seu Corpo em Números</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patinhas Felizes</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f9ff;
-            color: #333;
-        }
+<style>
+    body{
+        margin:0;
+        font-family:Arial, sans-serif;
+        background:#f8f8f8;
+    }
 
-        header {
-            background: linear-gradient(135deg, #0099ff, #00d4ff);
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-        }
+    header{
+        background:#ff914d;
+        color:white;
+        text-align:center;
+        padding:40px;
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+    .pets{
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:20px;
+        padding:30px;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 30px;
-        }
+    .card{
+        background:white;
+        width:250px;
+        border-radius:15px;
+        overflow:hidden;
+        box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        text-align:center;
+    }
 
-        .card {
-            background: white;
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+    .card img{
+        width:100%;
+        height:200px;
+        object-fit:cover;
+    }
 
-        .numero {
-            font-size: 2rem;
-            color: #0099ff;
-            font-weight: bold;
-        }
-    </style>
+    .card h2{
+        margin:10px 0;
+    }
+
+    .preco{
+        color:#ff914d;
+        font-size:22px;
+        font-weight:bold;
+    }
+
+    button{
+        background:#ff914d;
+        color:white;
+        border:none;
+        padding:10px 20px;
+        margin:15px;
+        border-radius:8px;
+        cursor:pointer;
+    }
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>🩺 Seu Corpo em Números</h1>
-    <p>Descubra fatos incríveis sobre o corpo humano!</p>
+    <h1>🐾 Patinhas Felizes</h1>
+    <p>Encontre seu novo melhor amigo!</p>
 </header>
 
-<div class="container">
+<section class="pets">
 
     <div class="card">
-        <div class="numero">100.000 km</div>
-        <p>É o comprimento aproximado dos vasos sanguíneos de uma pessoa adulta.</p>
+        <img src="https://placedog.net/400/300" alt="Cachorro">
+        <h2>Thor</h2>
+        <p>Golden Retriever</p>
+        <p class="preco">R$ 800</p>
+        <button>Adotar</button>
     </div>
 
     <div class="card">
-        <div class="numero">70 vezes</div>
-        <p>Seu coração bate, em média, 70 vezes por minuto.</p>
+        <img src="https://placekitten.com/400/300" alt="Gato">
+        <h2>Luna</h2>
+        <p>Gata Persa</p>
+        <p class="preco">R$ 500</p>
+        <button>Adotar</button>
     </div>
 
-    <div class="card">
-        <div class="numero">206 ossos</div>
-        <p>É a quantidade de ossos presentes no corpo humano adulto.</p>
-    </div>
-
-</div>
+</section>
 
 </body>
-</html>
+</html>,
