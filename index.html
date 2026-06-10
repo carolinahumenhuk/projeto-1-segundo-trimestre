@@ -4,124 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Detetive Interativo</title>
+<title>Mundo das Plantas</title>
 
 <style>
 
-/* ===== BASE ===== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
 body{
-    background:linear-gradient(180deg,#0b0f1a,#111827);
-    color:white;
-    line-height:1.7;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(180deg,#e8f5e9,#ffffff);
+    color:#2e2e2e;
+    line-height:1.6;
 }
-
-/* ===== PROGRESS BAR ===== */
-
-#progress-container{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:6px;
-    background:#222;
-    z-index:9999;
-}
-
-#progress-bar{
-    height:6px;
-    width:0%;
-    background:limegreen;
-}
-
-/* ===== HEADER ===== */
 
 header{
-    padding:30px;
     text-align:center;
-    background:#0f172a;
-    position:sticky;
-    top:0;
-    z-index:1000;
+    padding:60px 20px;
+    background:#2e7d32;
+    color:white;
 }
 
 header h1{
     font-size:2.5rem;
-    color:limegreen;
 }
-
-header p{
-    color:#aaa;
-}
-
-/* ===== SEÇÕES ===== */
 
 section{
-    padding:80px 10%;
+    padding:60px 20px;
+    max-width:900px;
+    margin:auto;
 }
 
-/* ===== CARD ===== */
+h2{
+    color:#2e7d32;
+    margin-bottom:20px;
+}
 
 .card{
-    background:#1f2937;
-    padding:25px;
-    border-radius:15px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
     margin-top:20px;
-    box-shadow:0 0 15px rgba(0,0,0,0.3);
 }
 
-/* ===== BOTÕES ===== */
+/* BOTÕES */
 
 button{
-    margin-top:15px;
-    padding:12px 18px;
+    background:#2e7d32;
+    color:white;
     border:none;
-    border-radius:10px;
+    padding:10px 15px;
+    border-radius:8px;
     cursor:pointer;
-    background:limegreen;
-    color:black;
-    font-weight:bold;
-    transition:0.3s;
+    margin-top:10px;
 }
 
 button:hover{
+    background:#1b5e20;
+}
+
+/* FLORES */
+
+.plantas{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.planta{
+    background:#f1f8e9;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.planta:hover{
     transform:scale(1.05);
 }
 
-/* ===== ESCOLHAS ===== */
-
-.choice{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-/* ===== TEXTO DETALHE ===== */
-
-#story{
-    margin-top:20px;
-    padding:20px;
-    background:#111827;
-    border-left:5px solid limegreen;
-}
-
-/* ===== RESPONSIVO ===== */
-
-@media(max-width:768px){
-    section{
-        padding:60px 6%;
-    }
-
-    header h1{
-        font-size:1.8rem;
-    }
+footer{
+    text-align:center;
+    padding:30px;
+    background:#2e7d32;
+    color:white;
+    margin-top:40px;
 }
 
 </style>
@@ -130,371 +97,130 @@ button:hover{
 
 <body>
 
-<!-- PROGRESS BAR -->
-<div id="progress-container">
-<div id="progress-bar"></div>
-</div>
-
-<!-- HEADER -->
 <header>
-<h1>🕵️ Detetive Interativo</h1>
-<p>Um caso misterioso precisa de você...</p>
+<h1>🌿 Mundo das Plantas</h1>
+<p>Descubra curiosidades sobre a natureza</p>
 </header>
 
-<!-- INTRO -->
 <section>
 
-<h2>📁 Caso: O Mistério da Escola</h2>
+<h2>🌱 O que são plantas?</h2>
 
 <div class="card">
-
 <p>
-Uma escola tranquila foi cenário de um mistério:
-um objeto importante desapareceu da sala do diretor.
+As plantas são seres vivos essenciais para a vida na Terra.
+Elas produzem oxigênio, servem de alimento e ajudam no equilíbrio do planeta.
 </p>
+</div>
 
+</section>
+
+<section>
+
+<h2>🌸 Tipos de plantas</h2>
+
+<div class="plantas">
+
+<div class="planta" onclick="info('árvores')">
+🌳 Árvores
+</div>
+
+<div class="planta" onclick="info('flores')">
+🌸 Flores
+</div>
+
+<div class="planta" onclick="info('cactos')">
+🌵 Cactos
+</div>
+
+<div class="planta" onclick="info('ervas')">
+🌿 Ervas
+</div>
+
+</div>
+
+<div class="card" id="resultado">
+Clique em uma planta acima para ver informações.
+</div>
+
+</section>
+
+<section>
+
+<h2>🌞 Curiosidade</h2>
+
+<div class="card">
+
+<button onclick="curiosidade()">
+Mostrar curiosidade
+</button>
+
+<p id="curio"></p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>🌎 Importância das plantas</h2>
+
+<div class="card">
 <p>
-Você foi chamado como o detetive principal.
-Suas escolhas vão mudar o rumo da investigação.
+As plantas ajudam a manter o ar limpo, reduzem o calor e são essenciais para todos os seres vivos.
+Sem elas, não existiria vida como conhecemos.
 </p>
-
-<button onclick="startCase()">
-🔍 Começar Investigação
-</button>
-
 </div>
 
 </section>
 
-<!-- STORY -->
-<section id="investigacao">
+<footer>
+<p>Projeto escolar - Mundo das Plantas 🌿</p>
+</footer>
 
-<h2>🧩 Primeira Decisão</h2>
-
-<div class="card">
-
-<p>
-Você chega na escola. Existem duas pistas iniciais:
-</p>
-
-<div class="choice">
-
-<button onclick="choice('secretaria')">
-📄 Investigar a secretaria
-</button>
-
-<button onclick="choice('corredor')">
-🚶 Explorar o corredor principal
-</button>
-
-</div>
-
-<div id="story"></div>
-
-</div>
-
-</section>
-<section>
-
-<h2>🧠 Status da Investigação</h2>
-
-<div class="card">
-
-<p>🧾 Pistas coletadas: <span id="pistas">0</span></p>
-<p>⭐ Pontos de detetive: <span id="pontos">0</span></p>
-
-<button onclick="addPista()">
-➕ Encontrar nova pista aleatória
-</button>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>👤 Suspeitos</h2>
-
-<div class="card">
-
-<button onclick="suspeito('diretor')">
-👨‍💼 Diretor
-</button>
-
-<button onclick="suspeito('zelador')">
-🧹 Zelador
-</button>
-
-<button onclick="suspeito('aluno')">
-🧑 Aluno misterioso
-</button>
-
-<div id="suspeitoInfo" style="margin-top:20px;"></div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>🏆 Final da Investigação</h2>
-
-<div class="card">
-
-<p>Quando achar que resolveu o caso:</p>
-
-<button onclick="finalizar()">
-🔎 Concluir Caso
-</button>
-
-<div id="final"></div>
-
-</div>
-
-</section>
-<!-- CLI SCRIPT -->
 <script>
 
-/* PROGRESS BAR */
+function info(tipo){
 
-window.onscroll = function(){
+let texto = "";
 
-let winScroll = document.body.scrollTop ||
-document.documentElement.scrollTop;
-
-let height =
-document.documentElement.scrollHeight -
-document.documentElement.clientHeight;
-
-let scrolled =
-(winScroll / height) * 100;
-
-document.getElementById("progress-bar")
-.style.width = scrolled + "%";
-
-};
-
-/* START */
-
-function startCase(){
-document.getElementById("investigacao")
-.scrollIntoView({behavior:"smooth"});
+if(tipo === "árvores"){
+texto = "As árvores são plantas grandes que produzem sombra e oxigênio.";
 }
 
-/* CHOICES */
+if(tipo === "flores"){
+texto = "As flores são responsáveis pela reprodução das plantas.";
+}
 
-function choice(option){
+if(tipo === "cactos"){
+texto = "Os cactos sobrevivem em lugares secos e armazenam água.";
+}
 
-let story = document.getElementById("story");
+if(tipo === "ervas"){
+texto = "As ervas são plantas pequenas usadas na alimentação e medicina.";
+}
 
-if(option === "secretaria"){
-
-story.innerHTML = `
-<h3>📄 Secretaria</h3>
-<p>
-Você encontra registros suspeitos de entrada na sala do diretor.
-Uma câmera foi desligada exatamente às 14:32.
-</p>
-
-<p>
-Agora você deve decidir o próximo passo.
-</p>
-
-<button onclick="next('camera')">
-📹 Verificar câmeras de segurança
-</button>
-
-<button onclick="next('aluno')">
-🧑 Interrogar alunos próximos
-</button>
-`;
+document.getElementById("resultado").innerHTML = texto;
 
 }
 
-if(option === "corredor"){
+function curiosidade(){
 
-story.innerHTML = `
-<h3>🚶 Corredor</h3>
-<p>
-Você encontra pegadas estranhas no chão levando até a biblioteca.
-Alguém correu rapidamente por aqui.
-</p>
+let lista = [
+"As plantas produzem oxigênio através da fotossíntese.",
+"Existem mais de 390 mil espécies de plantas no mundo.",
+"Algumas plantas vivem centenas de anos.",
+"As plantas se comunicam através de raízes e fungos."
+];
 
-<button onclick="next('biblioteca')">
-📚 Ir para a biblioteca
-</button>
+let aleatorio = Math.floor(Math.random() * lista.length);
 
-<button onclick="next('zelador')">
-🧹 Falar com o zelador
-</button>
-`;
-
-}
-
-}
-
-/* NEXT STEP */
-
-function next(step){
-
-let story = document.getElementById("story");
-
-if(step === "camera"){
-
-story.innerHTML = `
-<h3>📹 Câmeras</h3>
-<p>
-As imagens mostram uma pessoa encapuzada entrando na sala.
-O rosto não é visível.
-</p>
-
-<p><b>Fim da Parte 1...</b></p>
-`;
-
-}
-
-if(step === "aluno"){
-
-story.innerHTML = `
-<h3>🧑 Alunos</h3>
-<p>
-Um aluno menciona ter visto alguém suspeito perto da sala do diretor.
-</p>
-
-<p><b>Fim da Parte 1...</b></p>
-`;
-
-}
-
-if(step === "biblioteca"){
-
-story.innerHTML = `
-<h3>📚 Biblioteca</h3>
-<p>
-Você encontra um livro aberto com anotações estranhas.
-</p>
-
-<p><b>Fim da Parte 1...</b></p>
-`;
-
-}
-
-if(step === "zelador"){
-
-story.innerHTML = `
-<h3>🧹 Zelador</h3>
-<p>
-O zelador parece nervoso e evita responder perguntas diretas.
-</p>
-
-<p><b>Fim da Parte 1...</b></p>
-`;
-
-}
+document.getElementById("curio").innerHTML =
+lista[aleatorio];
 
 }
 
 </script>
 
-/* ===== VARIÁVEIS DO JOGO ===== */
-
-let pistas = 0;
-let pontos = 0;
-
-/* ===== PISTAS ALEATÓRIAS ===== */
-
-function addPista(){
-
-const lista = [
-"📄 Um documento foi removido da sala",
-"📹 Câmera desligada às 14:32",
-"👣 Pegadas encontradas no corredor",
-"🧤 Luva esquecida na biblioteca",
-"🧾 Registro de acesso suspeito"
-];
-
-let item = lista[Math.floor(Math.random()*lista.length)];
-
-pistas++;
-pontos += 2;
-
-document.getElementById("pistas").innerText = pistas;
-document.getElementById("pontos").innerText = pontos;
-
-document.getElementById("story").innerHTML =
-"<p>Nova pista encontrada:</p><b>" + item + "</b>";
-
-}
-
-/* ===== SUSPEITOS ===== */
-
-function suspeito(tipo){
-
-let info = document.getElementById("suspeitoInfo");
-
-if(tipo === "diretor"){
-
-info.innerHTML = `
-<h3>👨‍💼 Diretor</h3>
-<p>Afirma não saber de nada, mas parece nervoso ao falar sobre o objeto desaparecido.</p>
-`;
-
-pontos += 1;
-
-}
-
-if(tipo === "zelador"){
-
-info.innerHTML = `
-<h3>🧹 Zelador</h3>
-<p>Diz que viu alguém estranho no corredor, mas evita detalhes.</p>
-`;
-
-pontos += 2;
-
-}
-
-if(tipo === "aluno"){
-
-info.innerHTML = `
-<h3>🧑 Aluno misterioso</h3>
-<p>Foi visto perto da sala do diretor no horário do desaparecimento.</p>
-`;
-
-pontos += 3;
-
-}
-
-document.getElementById("pontos").innerText = pontos;
-
-}
-
-/* ===== FINAL DO JOGO ===== */
-
-function finalizar(){
-
-let final = document.getElementById("final");
-
-let rank = "";
-
-if(pontos <= 5){
-rank = "🟡 Detetive Iniciante";
-}
-
-else if(pontos <= 10){
-rank = "🟠 Detetive Experiente";
-}
-
-else{
-rank = "🟢 Detetive Mestre";
-}
-
-final.innerHTML = `
-<h3>📊 Resultado Final</h3>
-<p>Você terminou a investigação!</p>
-<p>🏆 Ranking: <b>${rank}</b></p>
-<p>⭐ Pontos finais: ${pontos}</p>
-`;
-}
 </body>
 </html>
