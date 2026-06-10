@@ -1,239 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Explorando o Universo</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    background:linear-gradient(to bottom,#000814,#001d3d);
-    color:white;
-    text-align:center;
-    overflow-x:hidden;
-}
-
-header{
-    padding:50px;
-}
-
-h1{
-    font-size:3rem;
-    color:#ffd60a;
-}
-
-section{
-    padding:40px;
-}
-
-.card{
-    background:rgba(255,255,255,0.1);
-    margin:20px auto;
-    padding:20px;
-    border-radius:15px;
-    width:80%;
-    max-width:700px;
-}
-
-.planetas{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-}
-
-.planeta{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.planeta:hover{
-    transform:scale(1.1);
-}
-
-.mercurio{background:gray;}
-.venus{background:orange;}
-.terra{background:deepskyblue;}
-.marte{background:red;}
-.jupiter{background:goldenrod;}
-.saturno{background:khaki;}
-.urano{background:lightblue;}
-.netuno{background:blue;}
-
-button{
-    background:#ffd60a;
-    color:black;
-    border:none;
-    padding:10px 20px;
-    margin-top:10px;
-    cursor:pointer;
-    border-radius:8px;
-    font-weight:bold;
-}
-
-input{
-    padding:10px;
-    margin-top:10px;
-    border-radius:8px;
-    border:none;
-}
-
-#stars{
-    position:fixed;
-    width:100%;
-    height:100%;
-    z-index:-1;
-}
-
-.star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:white;
-    animation:piscar 2s infinite;
-}
-
-@keyframes piscar{
-    50%{opacity:0.2;}
-}
-</style>
-</head>
 <body>
 
-<div id="stars"></div>
-
 <header>
-<h1>🌌 Explorando o Universo 🚀</h1>
-<p>Descubra os mistérios do espaço!</p>
+  <h1>🌸 O Encantador Mundo das Flores 🌸</h1>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#curiosidades">Curiosidades</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
 </header>
 
-<section class="card">
-<h2>🪐 Sistema Solar Interativo</h2>
-
-<div class="planetas">
-<div class="planeta mercurio" onclick="info('Mercúrio','Planeta mais próximo do Sol.')"></div>
-<div class="planeta venus" onclick="info('Vênus','Um dia dura mais que um ano.')"></div>
-<div class="planeta terra" onclick="info('Terra','Nosso planeta.')"></div>
-<div class="planeta marte" onclick="info('Marte','Conhecido como planeta vermelho.')"></div>
-<div class="planeta jupiter" onclick="info('Júpiter','Maior planeta do Sistema Solar.')"></div>
-<div class="planeta saturno" onclick="info('Saturno','Famoso pelos anéis.')"></div>
-<div class="planeta urano" onclick="info('Urano','Gira de lado.')"></div>
-<div class="planeta netuno" onclick="info('Netuno','Possui ventos extremamente fortes.')"></div>
-</div>
-
-<p id="planetainfo"></p>
+<section id="sobre">
+  <h2>🌹 O que são Flores?</h2>
+  <p>
+    As flores são estruturas responsáveis pela reprodução
+    de muitas plantas e desempenham papel fundamental
+    nos ecossistemas.
+  </p>
 </section>
 
-<section class="card">
-<h2>⭐ Quiz Astronômico</h2>
+<section id="galeria">
+  <h2>🌻 Galeria</h2>
 
-<p>Qual é o maior planeta do Sistema Solar?</p>
+  <div class="flor">
+    <img src="rosa.jpg" alt="Rosa vermelha">
+    <h3>Rosa</h3>
+  </div>
 
-<button onclick="quiz('errado')">Terra</button>
-<button onclick="quiz('certo')">Júpiter</button>
-<button onclick="quiz('errado')">Marte</button>
+  <div class="flor">
+    <img src="girassol.jpg" alt="Girassol amarelo">
+    <h3>Girassol</h3>
+  </div>
 
-<p id="quizresultado"></p>
+  <div class="flor">
+    <img src="orquidea.jpg" alt="Orquídea roxa">
+    <h3>Orquídea</h3>
+  </div>
+
 </section>
 
-<section class="card">
-<h2>🚀 Peso em Outros Planetas</h2>
+<section id="curiosidades">
+  <h2>🌼 Curiosidades</h2>
 
-<input type="number" id="peso" placeholder="Digite seu peso">
+  <button onclick="curiosidade()">
+    Mostrar curiosidade
+  </button>
 
-<br>
-
-<button onclick="calcularPeso()">Calcular</button>
-
-<p id="resultadoPeso"></p>
+  <p id="texto"></p>
 </section>
 
-<section class="card">
-<h2>🌠 Curiosidade Aleatória</h2>
+<section id="quiz">
+  <h2>🎯 Quiz</h2>
 
-<button onclick="curiosidade()">Mostrar Curiosidade</button>
+  <p>Qual flor acompanha o movimento do Sol?</p>
 
-<p id="curiosidade"></p>
+  <button onclick="resposta(false)">Rosa</button>
+  <button onclick="resposta(true)">Girassol</button>
+  <button onclick="resposta(false)">Tulipa</button>
+
+  <p id="resultado"></p>
 </section>
 
-<script>
-
-// estrelas
-
-for(let i=0;i<200;i++){
-    let star=document.createElement("div");
-    star.className="star";
-    star.style.left=Math.random()*100+"%";
-    star.style.top=Math.random()*100+"%";
-    document.getElementById("stars").appendChild(star);
-}
-
-// planetas
-
-function info(nome,texto){
-    document.getElementById("planetainfo").innerHTML=
-    "<h3>"+nome+"</h3><p>"+texto+"</p>";
-}
-
-// quiz
-
-function quiz(resp){
-
-    if(resp==="certo"){
-        document.getElementById("quizresultado").innerHTML=
-        "✅ Acertou!";
-    }else{
-        document.getElementById("quizresultado").innerHTML=
-        "❌ Errou!";
-    }
-
-}
-
-// peso
-
-function calcularPeso(){
-
-    let peso=document.getElementById("peso").value;
-
-    let marte=(peso*0.38).toFixed(1);
-    let jupiter=(peso*2.53).toFixed(1);
-
-    document.getElementById("resultadoPeso").innerHTML=
-    `
-    Em Marte: ${marte} kg<br>
-    Em Júpiter: ${jupiter} kg
-    `;
-}
-
-// curiosidades
-
-function curiosidade(){
-
-    let lista=[
-        "O Sol representa 99,8% da massa do Sistema Solar.",
-        "Existem bilhões de galáxias no universo.",
-        "A luz do Sol leva cerca de 8 minutos para chegar à Terra.",
-        "Júpiter tem mais de 90 luas conhecidas.",
-        "Um dia em Vênus dura mais que um ano em Vênus."
-    ];
-
-    let aleatorio=Math.floor(Math.random()*lista.length);
-
-    document.getElementById("curiosidade").innerHTML=
-    lista[aleatorio];
-}
-
-</script>
+<footer>
+  <p>Projeto Escolar - Mundo das Flores</p>
+</footer>
 
 </body>
-</html>
