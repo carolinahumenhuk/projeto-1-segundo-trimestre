@@ -4,576 +4,262 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Jardim Interativo das Flores</title>
+<title>Detetive Interativo</title>
 
 <style>
 
-:root{
-    --rosa:#ff7eb6;
-    --rosa-claro:#ffd6e8;
-    --verde:#4caf50;
-    --verde-claro:#dff6dd;
-    --texto:#2c2c2c;
-    --branco:#ffffff;
-}
+/* ===== BASE ===== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
+    font-family:Arial, sans-serif;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:linear-gradient(
-    180deg,
-    #fff8fb,
-    #ffeef7,
-    #fffdf5
-    );
-    color:var(--texto);
-    line-height:1.8;
+    background:linear-gradient(180deg,#0b0f1a,#111827);
+    color:white;
+    line-height:1.7;
 }
 
-/* BARRA DE PROGRESSO */
+/* ===== PROGRESS BAR ===== */
 
 #progress-container{
     position:fixed;
     top:0;
     left:0;
     width:100%;
-    height:8px;
-    background:#ddd;
+    height:6px;
+    background:#222;
     z-index:9999;
 }
 
 #progress-bar{
-    height:8px;
+    height:6px;
     width:0%;
-    background:linear-gradient(
-    90deg,
-    hotpink,
-    violet
-    );
+    background:limegreen;
 }
 
-/* MENU */
+/* ===== HEADER ===== */
 
 header{
+    padding:30px;
+    text-align:center;
+    background:#0f172a;
     position:sticky;
-    top:8px;
-    background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,.1);
+    top:0;
     z-index:1000;
 }
 
-nav{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
-    padding:15px;
+header h1{
+    font-size:2.5rem;
+    color:limegreen;
 }
 
-nav a{
-    text-decoration:none;
-    color:#444;
+header p{
+    color:#aaa;
+}
+
+/* ===== SEÇÕES ===== */
+
+section{
+    padding:80px 10%;
+}
+
+/* ===== CARD ===== */
+
+.card{
+    background:#1f2937;
+    padding:25px;
+    border-radius:15px;
+    margin-top:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+/* ===== BOTÕES ===== */
+
+button{
+    margin-top:15px;
+    padding:12px 18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:limegreen;
+    color:black;
     font-weight:bold;
-    transition:.3s;
+    transition:0.3s;
 }
 
-nav a:hover{
-    color:deeppink;
-}
-
-/* HERO */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px;
-}
-
-.hero-content{
-    max-width:900px;
-}
-
-.hero h1{
-    font-size:4rem;
-    color:deeppink;
-    margin-bottom:20px;
-}
-
-.hero p{
-    font-size:1.3rem;
-    margin-bottom:30px;
-}
-
-.btn{
-    display:inline-block;
-    background:deeppink;
-    color:white;
-    text-decoration:none;
-    padding:15px 25px;
-    border-radius:30px;
-    transition:.3s;
-}
-
-.btn:hover{
-    background:hotpink;
+button:hover{
     transform:scale(1.05);
 }
 
-/* SEÇÕES */
+/* ===== ESCOLHAS ===== */
 
-section{
-    padding:90px 10%;
+.choice{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
-section h2{
-    text-align:center;
-    margin-bottom:30px;
-    color:#c2185b;
-    font-size:2.2rem;
-}
+/* ===== TEXTO DETALHE ===== */
 
-.card{
-    background:white;
-    border-radius:20px;
-    padding:30px;
+#story{
     margin-top:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-/* FLORES */
-
-.grid-flores{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
-}
-
-.flor-card{
-    background:white;
-    border-radius:20px;
     padding:20px;
-    text-align:center;
-    cursor:pointer;
-    transition:.4s;
-    box-shadow:0 5px 12px rgba(0,0,0,.1);
+    background:#111827;
+    border-left:5px solid limegreen;
 }
 
-.flor-card:hover{
-    transform:translateY(-8px);
-}
-
-.flor-emoji{
-    font-size:4rem;
-    margin-bottom:10px;
-}
-
-.info-flor{
-    margin-top:25px;
-    background:#fff0f7;
-    padding:20px;
-    border-radius:15px;
-    display:none;
-}
-
-/* RESPONSIVO */
+/* ===== RESPONSIVO ===== */
 
 @media(max-width:768px){
+    section{
+        padding:60px 6%;
+    }
 
-.hero h1{
-    font-size:2.5rem;
-}
-
-.hero p{
-    font-size:1rem;
-}
-
-section{
-    padding:70px 7%;
-}
-
+    header h1{
+        font-size:1.8rem;
+    }
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- PROGRESS BAR -->
 <div id="progress-container">
 <div id="progress-bar"></div>
 </div>
 
+<!-- HEADER -->
 <header>
-
-<nav aria-label="Menu principal">
-
-<a href="#inicio">Início</a>
-<a href="#sobre">Sobre</a>
-<a href="#flores">Flores</a>
-<a href="#quiz">Quiz</a>
-<a href="#teste">Sua Flor</a>
-<a href="#galeria">Galeria</a>
-
-</nav>
-
+<h1>🕵️ Detetive Interativo</h1>
+<p>Um caso misterioso precisa de você...</p>
 </header>
 
-<main>
+<!-- INTRO -->
+<section>
 
-<section class="hero" id="inicio">
-
-<div class="hero-content">
-
-<h1>🌸 Jardim Interativo das Flores 🌸</h1>
-
-<p>
-
-Bem-vindo a uma viagem pelo mundo das flores.
-Explore curiosidades, descubra espécies incríveis,
-faça testes divertidos e aprenda como as flores
-transformam o planeta.
-
-</p>
-
-<a href="#sobre" class="btn">
-Começar a Explorar 🌷
-</a>
-
-</div>
-
-</section>
-
-<section id="sobre">
-
-<h2>🌼 O Fascinante Mundo das Flores</h2>
+<h2>📁 Caso: O Mistério da Escola</h2>
 
 <div class="card">
 
 <p>
-
-As flores são estruturas reprodutivas das plantas e
-existem há milhões de anos. Elas ajudam na
-polinização, alimentam diversos animais e tornam
-o ambiente mais bonito e saudável.
-
+Uma escola tranquila foi cenário de um mistério:
+um objeto importante desapareceu da sala do diretor.
 </p>
-
-<br>
 
 <p>
-
-Além de sua importância ecológica, as flores também
-fazem parte da cultura humana, aparecendo em festas,
-presentes, jardins e obras de arte.
-
+Você foi chamado como o detetive principal.
+Suas escolhas vão mudar o rumo da investigação.
 </p>
 
-<br>
-
-<p>
-
-Neste site você poderá conhecer espécies famosas,
-testar seus conhecimentos e descobrir qual flor mais
-combina com sua personalidade.
-
-</p>
+<button onclick="startCase()">
+🔍 Começar Investigação
+</button>
 
 </div>
 
 </section>
 
-<section id="flores">
+<!-- STORY -->
+<section id="investigacao">
 
-<h2>🌷 Conheça Algumas Flores</h2>
-
-<div class="grid-flores">
-
-<div class="flor-card"
-onclick="mostrarFlor('rosa')">
-
-<div class="flor-emoji">🌹</div>
-
-<h3>Rosa</h3>
-
-<p>Clique para saber mais</p>
-
-</div>
-
-<div class="flor-card"
-onclick="mostrarFlor('girassol')">
-
-<div class="flor-emoji">🌻</div>
-
-<h3>Girassol</h3>
-
-<p>Clique para saber mais</p>
-
-</div>
-
-<div class="flor-card"
-onclick="mostrarFlor('orquidea')">
-
-<div class="flor-emoji">🌸</div>
-
-<h3>Orquídea</h3>
-
-<p>Clique para saber mais</p>
-
-</div>
-
-<div class="flor-card"
-onclick="mostrarFlor('tulipa')">
-
-<div class="flor-emoji">🌷</div>
-
-<h3>Tulipa</h3>
-
-<p>Clique para saber mais</p>
-
-</div>
-
-</div>
-
-<div
-id="infoFlor"
-class="info-flor"
-aria-live="polite">
-
-</div>
-
-</section>
-<!-- QUIZ -->
-
-<section id="quiz">
-
-<h2>🧠 Quiz das Flores</h2>
-
-<div class="card">
-
-<p id="pergunta">
-Qual flor é famosa por acompanhar o Sol?
-</p>
-
-<button onclick="responderQuiz('errado')">
-🌹 Rosa
-</button>
-
-<button onclick="responderQuiz('certo')">
-🌻 Girassol
-</button>
-
-<button onclick="responderQuiz('errado')">
-🌷 Tulipa
-</button>
-
-<p id="resultadoQuiz"
-style="margin-top:20px;font-weight:bold;">
-</p>
-
-</div>
-
-</section>
-
-<!-- TESTE DE PERSONALIDADE -->
-
-<section id="teste">
-
-<h2>🌈 Descubra Sua Flor Ideal</h2>
+<h2>🧩 Primeira Decisão</h2>
 
 <div class="card">
 
 <p>
-Você prefere:
+Você chega na escola. Existem duas pistas iniciais:
 </p>
 
-<button onclick="florIdeal('sol')">
-☀️ Sol
+<div class="choice">
+
+<button onclick="choice('secretaria')">
+📄 Investigar a secretaria
 </button>
 
-<button onclick="florIdeal('sombra')">
-🌙 Sombra
+<button onclick="choice('corredor')">
+🚶 Explorar o corredor principal
 </button>
 
-<button onclick="florIdeal('equilibrio')">
-🌤️ Um pouco dos dois
-</button>
-
-<div id="resultadoFlor"
-style="margin-top:25px;">
 </div>
+
+<div id="story"></div>
 
 </div>
 
 </section>
+<section>
 
-<!-- CURIOSIDADES -->
-
-<section id="curiosidades">
-
-<h2>🌼 Curiosidades Surpreendentes</h2>
+<h2>🧠 Status da Investigação</h2>
 
 <div class="card">
 
-<button onclick="curiosidade()">
-Descobrir Curiosidade 🌸
+<p>🧾 Pistas coletadas: <span id="pistas">0</span></p>
+<p>⭐ Pontos de detetive: <span id="pontos">0</span></p>
+
+<button onclick="addPista()">
+➕ Encontrar nova pista aleatória
 </button>
 
-<p id="curiosidadeTexto"
-style="margin-top:20px;">
-</p>
-
 </div>
 
 </section>
-
-<!-- GALERIA -->
-
-<section id="galeria">
-
-<h2>📸 Galeria das Flores</h2>
-
-<div class="grid-flores">
-
-<div class="flor-card"
-onmouseover="mostrarGaleria('rosa')">
-
-<div class="flor-emoji">🌹</div>
-
-<h3>Rosa</h3>
-
-</div>
-
-<div class="flor-card"
-onmouseover="mostrarGaleria('girassol')">
-
-<div class="flor-emoji">🌻</div>
-
-<h3>Girassol</h3>
-
-</div>
-
-<div class="flor-card"
-onmouseover="mostrarGaleria('orquidea')">
-
-<div class="flor-emoji">🌸</div>
-
-<h3>Orquídea</h3>
-
-</div>
-
-<div class="flor-card"
-onmouseover="mostrarGaleria('tulipa')">
-
-<div class="flor-emoji">🌷</div>
-
-<h3>Tulipa</h3>
-
-</div>
-
-</div>
-
-<div
-id="galeriaInfo"
-class="info-flor"
-style="display:block;margin-top:30px;">
-
-Passe o mouse sobre uma flor.
-
-</div>
-
-</section>
-
-<!-- MODO ESCURO -->
 
 <section>
 
-<h2>🌙 Personalização</h2>
+<h2>👤 Suspeitos</h2>
 
 <div class="card">
 
-<button onclick="alternarTema()">
-Alternar Modo Escuro
+<button onclick="suspeito('diretor')">
+👨‍💼 Diretor
 </button>
+
+<button onclick="suspeito('zelador')">
+🧹 Zelador
+</button>
+
+<button onclick="suspeito('aluno')">
+🧑 Aluno misterioso
+</button>
+
+<div id="suspeitoInfo" style="margin-top:20px;"></div>
 
 </div>
 
 </section>
 
-<!-- MINI JOGO -->
+<section>
 
-<section id="jogo">
-
-<h2>🐝 Mini Jogo da Polinização</h2>
+<h2>🏆 Final da Investigação</h2>
 
 <div class="card">
 
-<p>
-Qual flor costuma atrair muitos polinizadores?
-</p>
+<p>Quando achar que resolveu o caso:</p>
 
-<button onclick="jogo('certo')">
-🌻 Girassol
+<button onclick="finalizar()">
+🔎 Concluir Caso
 </button>
 
-<button onclick="jogo('errado')">
-🪨 Pedra
-</button>
-
-<button onclick="jogo('errado')">
-📦 Caixa
-</button>
-
-<p id="resultadoJogo"
-style="margin-top:20px;">
-</p>
+<div id="final"></div>
 
 </div>
 
 </section>
-
-<!-- RODAPÉ -->
-
-<footer
-style="
-background:#c2185b;
-color:white;
-padding:40px;
-text-align:center;
-margin-top:60px;
-">
-
-<h3>🌸 Jardim Interativo das Flores 🌸</h3>
-
-<p>
-Projeto educativo sobre flores, natureza e
-polinização.
-</p>
-
-<p style="margin-top:15px;">
-Feito para a escola ❤️
-</p>
-
-</footer>
+<!-- CLI SCRIPT -->
 <script>
 
-/* BARRA DE PROGRESSO */
+/* PROGRESS BAR */
 
 window.onscroll = function(){
 
-let winScroll =
-document.body.scrollTop ||
+let winScroll = document.body.scrollTop ||
 document.documentElement.scrollTop;
 
 let height =
@@ -583,70 +269,125 @@ document.documentElement.clientHeight;
 let scrolled =
 (winScroll / height) * 100;
 
-document.getElementById(
-"progress-bar"
-).style.width = scrolled + "%";
+document.getElementById("progress-bar")
+.style.width = scrolled + "%";
 
 };
 
-/* FLORES */
+/* START */
 
-function mostrarFlor(flor){
+function startCase(){
+document.getElementById("investigacao")
+.scrollIntoView({behavior:"smooth"});
+}
 
-const info =
-document.getElementById("infoFlor");
+/* CHOICES */
 
-info.style.display = "block";
+function choice(option){
 
-if(flor === "rosa"){
+let story = document.getElementById("story");
 
-info.innerHTML = `
-<h3>🌹 Rosa</h3>
+if(option === "secretaria"){
+
+story.innerHTML = `
+<h3>📄 Secretaria</h3>
 <p>
-A rosa é uma das flores mais famosas do mundo.
-Ela simboliza amor, carinho e amizade.
-Existem centenas de variedades com diferentes
-cores e significados.
+Você encontra registros suspeitos de entrada na sala do diretor.
+Uma câmera foi desligada exatamente às 14:32.
 </p>
+
+<p>
+Agora você deve decidir o próximo passo.
+</p>
+
+<button onclick="next('camera')">
+📹 Verificar câmeras de segurança
+</button>
+
+<button onclick="next('aluno')">
+🧑 Interrogar alunos próximos
+</button>
 `;
 
 }
 
-if(flor === "girassol"){
+if(option === "corredor"){
 
-info.innerHTML = `
-<h3>🌻 Girassol</h3>
+story.innerHTML = `
+<h3>🚶 Corredor</h3>
 <p>
-O girassol é conhecido por acompanhar a luz do Sol.
-Pode atingir grandes alturas e produz sementes
-utilizadas na alimentação.
+Você encontra pegadas estranhas no chão levando até a biblioteca.
+Alguém correu rapidamente por aqui.
 </p>
+
+<button onclick="next('biblioteca')">
+📚 Ir para a biblioteca
+</button>
+
+<button onclick="next('zelador')">
+🧹 Falar com o zelador
+</button>
 `;
 
 }
 
-if(flor === "orquidea"){
+}
 
-info.innerHTML = `
-<h3>🌸 Orquídea</h3>
+/* NEXT STEP */
+
+function next(step){
+
+let story = document.getElementById("story");
+
+if(step === "camera"){
+
+story.innerHTML = `
+<h3>📹 Câmeras</h3>
 <p>
-As orquídeas possuem milhares de espécies.
-São admiradas por suas formas elegantes e
-cores impressionantes.
+As imagens mostram uma pessoa encapuzada entrando na sala.
+O rosto não é visível.
 </p>
+
+<p><b>Fim da Parte 1...</b></p>
 `;
 
 }
 
-if(flor === "tulipa"){
+if(step === "aluno"){
 
-info.innerHTML = `
-<h3>🌷 Tulipa</h3>
+story.innerHTML = `
+<h3>🧑 Alunos</h3>
 <p>
-Muito associada à Holanda, a tulipa é uma flor
-colorida que floresce na primavera e simboliza
-renovação.
+Um aluno menciona ter visto alguém suspeito perto da sala do diretor.
 </p>
+
+<p><b>Fim da Parte 1...</b></p>
+`;
+
+}
+
+if(step === "biblioteca"){
+
+story.innerHTML = `
+<h3>📚 Biblioteca</h3>
+<p>
+Você encontra um livro aberto com anotações estranhas.
+</p>
+
+<p><b>Fim da Parte 1...</b></p>
+`;
+
+}
+
+if(step === "zelador"){
+
+story.innerHTML = `
+<h3>🧹 Zelador</h3>
+<p>
+O zelador parece nervoso e evita responder perguntas diretas.
+</p>
+
+<p><b>Fim da Parte 1...</b></p>
 `;
 
 }
@@ -654,3 +395,106 @@ renovação.
 }
 
 </script>
+
+/* ===== VARIÁVEIS DO JOGO ===== */
+
+let pistas = 0;
+let pontos = 0;
+
+/* ===== PISTAS ALEATÓRIAS ===== */
+
+function addPista(){
+
+const lista = [
+"📄 Um documento foi removido da sala",
+"📹 Câmera desligada às 14:32",
+"👣 Pegadas encontradas no corredor",
+"🧤 Luva esquecida na biblioteca",
+"🧾 Registro de acesso suspeito"
+];
+
+let item = lista[Math.floor(Math.random()*lista.length)];
+
+pistas++;
+pontos += 2;
+
+document.getElementById("pistas").innerText = pistas;
+document.getElementById("pontos").innerText = pontos;
+
+document.getElementById("story").innerHTML =
+"<p>Nova pista encontrada:</p><b>" + item + "</b>";
+
+}
+
+/* ===== SUSPEITOS ===== */
+
+function suspeito(tipo){
+
+let info = document.getElementById("suspeitoInfo");
+
+if(tipo === "diretor"){
+
+info.innerHTML = `
+<h3>👨‍💼 Diretor</h3>
+<p>Afirma não saber de nada, mas parece nervoso ao falar sobre o objeto desaparecido.</p>
+`;
+
+pontos += 1;
+
+}
+
+if(tipo === "zelador"){
+
+info.innerHTML = `
+<h3>🧹 Zelador</h3>
+<p>Diz que viu alguém estranho no corredor, mas evita detalhes.</p>
+`;
+
+pontos += 2;
+
+}
+
+if(tipo === "aluno"){
+
+info.innerHTML = `
+<h3>🧑 Aluno misterioso</h3>
+<p>Foi visto perto da sala do diretor no horário do desaparecimento.</p>
+`;
+
+pontos += 3;
+
+}
+
+document.getElementById("pontos").innerText = pontos;
+
+}
+
+/* ===== FINAL DO JOGO ===== */
+
+function finalizar(){
+
+let final = document.getElementById("final");
+
+let rank = "";
+
+if(pontos <= 5){
+rank = "🟡 Detetive Iniciante";
+}
+
+else if(pontos <= 10){
+rank = "🟠 Detetive Experiente";
+}
+
+else{
+rank = "🟢 Detetive Mestre";
+}
+
+final.innerHTML = `
+<h3>📊 Resultado Final</h3>
+<p>Você terminou a investigação!</p>
+<p>🏆 Ranking: <b>${rank}</b></p>
+<p>⭐ Pontos finais: ${pontos}</p>
+`;
+}
+</body>
+</html>
